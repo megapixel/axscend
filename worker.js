@@ -15,7 +15,7 @@
  *   Verify "noreply@axscend.ai" as a Single Sender in SendGrid before deploying.
  */
 
-const ALLOWED_ORIGINS = ['https://axscend.ai', 'https://www.axscend.ai'];
+const ALLOWED_ORIGINS = ['https://axscend.ai', 'https://www.axscend.ai', 'https://megapixel.github.io'];
 const TO_EMAIL = 'hello@axscend.io';
 const FROM_EMAIL = 'hello@axscend.io';
 const FROM_NAME = 'Axscend Website';
