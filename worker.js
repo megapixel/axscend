@@ -16,8 +16,8 @@
  */
 
 const ALLOWED_ORIGINS = ['https://axscend.ai', 'https://www.axscend.ai'];
-const TO_EMAIL = 'calvert@axscend.ai';
-const FROM_EMAIL = 'noreply@axscend.ai';
+const TO_EMAIL = 'hello@axscend.io';
+const FROM_EMAIL = 'hello@axscend.io';
 const FROM_NAME = 'Axscend Website';
 
 function corsHeaders(origin) {
