@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contact — Axscend</title>
+<meta name="description" content="Book your free consultation. Thirty minutes, no commitment.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2304050e'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' text-anchor='middle' fill='%23c9a96e'%3EA%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Axscend">
+<meta property="og:title" content="Contact — Axscend">
+<meta property="og:description" content="Book your free consultation. Thirty minutes, no commitment.">
+<meta property="og:url" content="https://axscend.ai/axscend_contact.html">
+<meta property="og:image" content="https://axscend.ai/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — Axscend">
+<meta name="twitter:description" content="Book your free consultation. Thirty minutes, no commitment.">
+<meta name="twitter:image" content="https://axscend.ai/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --void:#04050e;--void2:#070912;
+  --ink:#f4f2ff;--ink-soft:rgba(244,242,255,0.82);--ink-dim:rgba(244,242,255,0.52);
+  --ink-faint:rgba(244,242,255,0.30);--ink-ghost:rgba(244,242,255,0.14);
+  --gold:#c9a96e;--gold-lt:#e6cb9c;--gold-glow:rgba(201,169,110,0.18);
+  --cool:rgba(150,178,224,0.9);
+  --line:rgba(244,242,255,0.08);--line2:rgba(244,242,255,0.14);
+  --fd:'Cinzel',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif;--fm:'DM Mono',monospace;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+html{overflow-x:hidden;scroll-behavior:smooth}
+body{background:var(--void);color:var(--ink);font-family:var(--fb);font-weight:300;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;line-height:1.5}
+body::after{content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:220px;opacity:.018;mix-blend-mode:screen}
+.ambient{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 55% at 22% 18%,rgba(70,90,150,0.10),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 82% 78%,rgba(40,70,120,0.08),transparent 62%);
+  animation:breathe 14s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.8}50%{opacity:1}}
+#sky{position:fixed;inset:0;z-index:3;pointer-events:none}
+.wrap{position:relative;z-index:5}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;padding:0 max(6%,28px);
+  display:flex;align-items:center;justify-content:space-between;transition:background .4s var(--ease),backdrop-filter .4s}
+nav.scrolled{background:rgba(4,5,14,0.72);backdrop-filter:blur(16px)}
+.logo{font-family:var(--fd);font-size:16px;font-weight:500;letter-spacing:.22em;color:var(--ink);text-decoration:none;text-transform:uppercase}
+.nav-r{display:flex;align-items:center;gap:36px}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{font-family:var(--fm);font-size:10px;letter-spacing:.14em;color:var(--ink-dim);text-decoration:none;text-transform:uppercase;transition:color .25s}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-cta{font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:10px 24px;
+  border:1px solid rgba(201,169,110,.4);border-radius:2px;color:var(--gold-lt);text-decoration:none;transition:all .3s}
+.nav-cta:hover{background:rgba(201,169,110,.08);border-color:var(--gold)}
+@media(max-width:760px){.nav-links{display:none}}
+section{position:relative}
+.container{max-width:1180px;margin:0 auto;padding:0 max(6%,28px)}
+.eyebrow{font-family:var(--fm);font-size:10px;letter-spacing:.28em;color:var(--ink-faint);text-transform:uppercase;margin-bottom:28px}
+.eyebrow.cool{color:var(--cool)}
+h1,h2,h3{font-family:var(--fd);font-weight:500;color:var(--ink);letter-spacing:.02em}
+.display{font-size:clamp(38px,5.6vw,74px);line-height:1.14;letter-spacing:.03em;text-transform:uppercase}
+.h-sec{font-size:clamp(28px,4vw,50px);line-height:1.22;margin-bottom:26px}
+.lead{font-size:clamp(18px,1.7vw,21px);line-height:1.75;color:var(--ink-soft);font-weight:300;max-width:46ch}
+.body{font-size:17px;line-height:1.82;color:var(--ink-soft);font-weight:300;max-width:62ch}
+.body+.body{margin-top:18px}
+.body strong{color:var(--ink);font-weight:500}
+.veil{position:relative;isolation:isolate}
+.veil::before{content:"";position:absolute;inset:-50px -64px;z-index:-1;border-radius:10px;
+  background:radial-gradient(ellipse 86% 84% at 50% 50%,rgba(4,5,14,0.78) 30%,rgba(4,5,14,0.4) 62%,transparent 100%)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 34px;font-family:var(--fm);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .3s var(--ease);cursor:pointer}
+.btn-gold{background:var(--gold);color:#0a0a12;border:1px solid var(--gold);font-weight:400}
+.btn-gold:hover{background:var(--gold-lt);border-color:var(--gold-lt);box-shadow:0 0 44px var(--gold-glow);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line2)}
+.btn-ghost:hover{border-color:var(--ink-dim);color:var(--ink)}
+footer{padding:40px max(6%,28px);border-top:1px solid var(--line);display:flex;align-items:center;
+  justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;z-index:5}
+.foot-logo{font-family:var(--fd);font-size:15px;letter-spacing:.2em;color:var(--ink-dim);text-transform:uppercase}
+.foot-links{display:flex;gap:26px}
+.foot-links a{font-family:var(--fm);font-size:10px;letter-spacing:.12em;color:var(--ink-faint);text-decoration:none;text-transform:uppercase;transition:color .25s}
+.foot-links a:hover{color:var(--ink-soft)}
+.foot-status{display:flex;align-items:center;gap:8px;font-family:var(--fm);font-size:10px;color:var(--ink-faint);letter-spacing:.1em;text-transform:uppercase}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--cool);box-shadow:0 0 6px var(--cool);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.hero-contact{padding:150px 0 60px}
+.hero-contact .lead{margin-top:26px}
+.c-grid{display:grid;grid-template-columns:1fr 360px;gap:48px;padding:20px 0 clamp(90px,12vh,150px);align-items:start}
+@media(max-width:960px){.c-grid{grid-template-columns:1fr}.sidebar{order:-1}}
+
+.form-card{background:rgba(7,9,18,0.6);border:1px solid var(--line);border-radius:6px;
+  padding:36px;position:relative;overflow:hidden;backdrop-filter:blur(6px)}
+.form-progress{position:absolute;top:0;left:0;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--gold),var(--gold-lt));transition:width .5s var(--ease)}
+.fsec{font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--ink-faint);
+  text-transform:uppercase;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.fsec.mt{margin-top:34px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.fg{margin-bottom:16px}
+.fl{display:block;font-family:var(--fm);font-size:9px;letter-spacing:.1em;color:var(--ink-dim);
+  text-transform:uppercase;margin-bottom:8px}
+.req{color:var(--gold)}
+.fi,.fsel,.fta{width:100%;background:rgba(244,242,255,0.04);border:1px solid var(--line);border-radius:3px;
+  padding:13px 15px;color:var(--ink);font-size:15px;font-family:var(--fb);font-weight:300;outline:none;
+  transition:border-color .25s,background .25s;-webkit-appearance:none}
+.fi:focus,.fsel:focus,.fta:focus{border-color:rgba(150,178,224,0.5);background:rgba(244,242,255,0.06)}
+.fi::placeholder,.fta::placeholder{color:var(--ink-faint)}
+.fsel{background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23c9a96e' stroke-width='1.2' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;padding-right:36px;cursor:pointer}
+.fsel option{background:var(--void)}
+.fta{resize:vertical;min-height:80px;line-height:1.6}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.slot{padding:11px 8px;background:rgba(244,242,255,0.03);border:1px solid var(--line);border-radius:3px;
+  font-family:var(--fm);font-size:9px;letter-spacing:.04em;color:var(--ink-dim);text-align:center;cursor:pointer;
+  user-select:none;transition:all .2s}
+.slot:hover{border-color:var(--line2);color:var(--ink-soft)}
+.slot.sel{background:rgba(201,169,110,0.1);border-color:rgba(201,169,110,0.45);color:var(--gold-lt)}
+.tz{font-family:var(--fm);font-size:9px;color:var(--ink-faint);letter-spacing:.06em;margin-bottom:26px}
+.submit{width:100%;padding:15px;margin-top:8px;background:var(--gold);border:1px solid var(--gold);border-radius:3px;
+  color:#0a0a12;font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  font-weight:400;transition:all .25s}
+.submit:hover:not(:disabled){background:var(--gold-lt);box-shadow:0 0 36px var(--gold-glow)}
+.submit:disabled{opacity:.3;cursor:not-allowed}
+.legal{font-family:var(--fm);font-size:9px;color:var(--ink-faint);letter-spacing:.04em;margin-top:14px;line-height:1.6;text-align:center}
+.cal-sub{font-size:14px;line-height:1.7;color:var(--ink-dim);font-weight:300;margin-bottom:22px}
+.calendly-inline-widget{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--void2)}
+.cal-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--fm);font-size:10px;letter-spacing:.18em;color:var(--ink-faint);text-transform:uppercase;z-index:0}
+.opt{color:var(--ink-faint);font-style:normal;text-transform:none;letter-spacing:.04em}
+.reassure{font-size:12px;color:var(--ink-soft);font-weight:300;line-height:1.6;text-align:center;margin-top:14px}
+.form-err{display:none;font-size:12px;color:#e0788c;font-weight:300;line-height:1.6;text-align:center;margin-top:12px}
+.form-err a{color:#e0788c}
+.legal a{color:var(--gold);text-decoration:none}
+.success{display:none;text-align:center;padding:48px 16px}
+.success.on{display:block}
+.success-ring{width:54px;height:54px;border-radius:50%;border:1px solid rgba(150,178,224,0.6);
+  background:rgba(150,178,224,0.08);display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;font-size:22px;color:var(--cool)}
+.success h3{font-family:var(--fd);font-size:24px;font-weight:500;color:var(--ink);margin-bottom:12px;letter-spacing:.03em}
+.success p{font-size:15px;color:var(--ink-soft);font-weight:300;line-height:1.75;max-width:42ch;margin:0 auto}
+.success a{color:var(--gold);text-decoration:none}
+
+.sidebar>*{margin-bottom:14px}
+.panel{background:rgba(7,9,18,0.6);border:1px solid var(--line);border-radius:6px;padding:26px;backdrop-filter:blur(6px)}
+.panel-label{font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--ink-faint);text-transform:uppercase;margin-bottom:18px}
+.info-row{margin-bottom:14px}
+.info-row:last-child{margin-bottom:0}
+.info-k{font-family:var(--fm);font-size:9px;letter-spacing:.08em;color:var(--ink-faint);text-transform:uppercase;margin-bottom:3px}
+.info-v{font-size:14px;color:var(--ink-soft);font-weight:300}
+.info-v a{color:var(--gold);text-decoration:none}
+.steps{counter-reset:s;list-style:none}
+.step{counter-increment:s;display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none;padding-bottom:0}
+.step::before{content:counter(s,decimal-leading-zero);font-family:var(--fm);font-size:10px;color:var(--gold);flex-shrink:0;padding-top:2px}
+.step span{font-size:13px;color:var(--ink-soft);line-height:1.55;font-weight:300}
+
+</style>
+</head>
+<body>
+<div class="ambient"></div>
+<canvas id="sky"></canvas>
+<div class="wrap">
+<nav id="nav">
+  <a href="/" class="logo">Axscend</a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/contact/" class="active">Contact</a></li>
+    </ul>
+    <a href="/contact/" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<header class="hero-contact">
+  <div class="container">
+    <div class="eyebrow" style="opacity:0;animation:fadein 1s var(--ease) .8s forwards">Contact &nbsp;·&nbsp; Singapore</div>
+    <h1 class="display" style="font-size:clamp(34px,4.8vw,62px)">Book your free consultation.</h1>
+    <p class="lead" style="opacity:0;animation:fadein 1s var(--ease) 1s forwards">Pick a time below. We run a live check across ChatGPT, Perplexity, Claude and DeepSeek before your call, then walk you through exactly where your business stands. Thirty minutes. No commitment.</p>
+  </div>
+</header>
+
+<div class="container">
+  <div class="c-grid">
+    <div class="form-card rv">
+      <div class="cal-head">
+        <div class="fsec" style="margin-bottom:8px">Get your free consultation</div>
+        <p class="cal-sub">Pick a time that suits you. You get an instant confirmation and a calendar invite, and we run your live AI visibility check before we speak.</p>
+      </div>
+      <div class="calendly-inline-widget" data-url="https://calendly.com/calvert-axscend/30min?hide_gdpr_banner=1&background_color=070912&text_color=f4f2ff&primary_color=c9a96e" style="min-width:300px;height:700px;position:relative">
+        <div class="cal-loading">Loading the calendar</div>
+      </div>
+      <p class="legal" style="margin-top:18px">Prefer email? <a href="mailto:calvert@axscend.ai">calvert@axscend.ai</a> &nbsp;·&nbsp; By booking you agree to our <a href="/terms/">Terms</a> and <a href="axscend_terms.html#privacy">Privacy Policy</a>.</p>
+    </div>
+
+    <div class="sidebar">
+      <div class="panel rv">
+        <div class="panel-label">Contact</div>
+        <div class="info-row"><div class="info-k">Email</div><div class="info-v"><a href="mailto:calvert@axscend.ai">calvert@axscend.ai</a></div></div>
+        <div class="info-row"><div class="info-k">Location</div><div class="info-v">Singapore</div></div>
+        <div class="info-row"><div class="info-k">Booking</div><div class="info-v">Instant confirmation and calendar invite</div></div>
+      </div>
+      <div class="panel rv d1">
+        <div class="panel-label">What happens next</div>
+        <ul class="steps">
+          <li class="step"><span>Pick a time and you get an instant confirmation with a calendar invite</span></li>
+          <li class="step"><span>We run a live AI visibility check on your business across all four platforms before the call</span></li>
+          <li class="step"><span>On the call we show you exactly what AI knows about your business, and what it does not</span></li>
+          <li class="step"><span>We walk you through what closing the gap would look like for you</span></li>
+          <li class="step"><span>You leave knowing exactly where you stand, with no pressure</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom:clamp(90px,12vh,150px)">
+  <div class="form-card rv" style="max-width:680px;margin-top:0">
+    <div class="form-progress" id="form-progress"></div>
+    <div id="inquiry-wrap">
+      <div class="fsec">Send a message</div>
+      <p class="cal-sub" style="margin-bottom:28px">Prefer to write? Fill in the form and we will get back to you within one business day.</p>
+      <form id="inquiry-form" novalidate>
+        <div class="frow">
+          <div class="fg">
+            <label class="fl" for="fi-name">Name <span class="req">*</span></label>
+            <input id="fi-name" class="fi" type="text" name="name" placeholder="Your name" required>
+          </div>
+          <div class="fg">
+            <label class="fl" for="fi-email">Email <span class="req">*</span></label>
+            <input id="fi-email" class="fi" type="email" name="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label class="fl" for="fi-company">Company <em class="opt">(optional)</em></label>
+            <input id="fi-company" class="fi" type="text" name="company" placeholder="Your company">
+          </div>
+          <div class="fg">
+            <label class="fl" for="fi-service">I am interested in</label>
+            <select id="fi-service" class="fsel" name="service">
+              <option value="">Select a topic</option>
+              <option value="AI Visibility Audit">AI Visibility Audit</option>
+              <option value="AI Content Strategy">AI Content Strategy</option>
+              <option value="Ongoing Optimisation">Ongoing Optimisation</option>
+              <option value="Something else">Something else</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="fl" for="fi-message">Message <span class="req">*</span></label>
+          <textarea id="fi-message" class="fta" name="message" placeholder="Tell us about your business and what you are hoping to achieve…" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="submit">Send Message</button>
+        <p class="form-err" id="form-err">Something went wrong. Please try again or email <a href="mailto:calvert@axscend.ai">calvert@axscend.ai</a> directly.</p>
+        <p class="legal" style="margin-top:14px">By submitting you agree to our <a href="/terms/">Terms</a> and <a href="/terms/#privacy">Privacy Policy</a>.</p>
+      </form>
+    </div>
+    <div class="success" id="form-success">
+      <div class="success-ring">✓</div>
+      <h3>Message received</h3>
+      <p>Thank you — we will review your message and get back to you within one business day. <a href="/">Back to home</a>.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-logo">Axscend</div>
+  <div class="foot-links"><a href="/about/">About</a><a href="/contact/">Contact</a><a href="/terms/">Terms</a></div>
+  <div class="foot-status"><span class="live-dot"></span>Available for new clients</div>
+</footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+'use strict';
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.15,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+(function(){
+  if(typeof THREE==='undefined')return;
+  const canvas=document.getElementById('sky');
+  let W=innerWidth,H=innerHeight;
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(W,H);renderer.setClearColor(0,0);
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(55,W/H,0.1,100);cam.position.z=9;
+  const group=new THREE.Group();scene.add(group);
+  function glowTex(){
+    const c=document.createElement('canvas');c.width=c.height=64;
+    const x=c.getContext('2d');
+    const g=x.createRadialGradient(32,32,0,32,32,32);
+    g.addColorStop(0,'rgba(255,255,255,1)');
+    g.addColorStop(0.25,'rgba(210,224,255,0.7)');
+    g.addColorStop(1,'rgba(150,178,224,0)');
+    x.fillStyle=g;x.fillRect(0,0,64,64);
+    return new THREE.CanvasTexture(c);
+  }
+  const tex=glowTex();
+  const COUNT=80;
+  const base=[];
+  for(let i=0;i<COUNT;i++){
+    const r=3.2+Math.random()*4.4;
+    const theta=Math.random()*Math.PI*2;
+    const phi=Math.acos(2*Math.random()-1);
+    base.push(new THREE.Vector3(r*Math.sin(phi)*Math.cos(theta),r*Math.sin(phi)*Math.sin(theta)*0.72,r*Math.cos(phi)*0.55));
+  }
+  const pg=new THREE.BufferGeometry();
+  const pp=new Float32Array(COUNT*3),psz=new Float32Array(COUNT);
+  base.forEach((v,i)=>{pp[i*3]=v.x;pp[i*3+1]=v.y;pp[i*3+2]=v.z;psz[i]=Math.random()>0.86?2.6:1.0;});
+  pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
+  pg.setAttribute('sz',new THREE.BufferAttribute(psz,1));
+  const pm=new THREE.ShaderMaterial({
+    transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
+    uniforms:{uTex:{value:tex},uOpacity:{value:1},uWarm:{value:0}},
+    vertexShader:`attribute float sz;varying float vS;
+      void main(){vS=sz;vec4 mv=modelViewMatrix*vec4(position,1.);
+        gl_PointSize=sz*(190./-mv.z);gl_Position=projectionMatrix*mv;}`,
+    fragmentShader:`uniform sampler2D uTex;uniform float uOpacity;uniform float uWarm;varying float vS;
+      void main(){vec4 t=texture2D(uTex,gl_PointCoord);
+        vec3 cold=mix(vec3(0.62,0.70,0.88),vec3(0.92,0.94,1.0),vS*0.4);
+        vec3 warm=vec3(0.85,0.71,0.44);
+        vec3 col=mix(cold,warm,uWarm);
+        gl_FragColor=vec4(col,t.a*uOpacity*(0.45+vS*0.32));}`
+  });
+  group.add(new THREE.Points(pg,pm));
+  const pairs=[];
+  for(let i=0;i<COUNT;i++)for(let j=i+1;j<COUNT;j++){if(base[i].distanceTo(base[j])<2.05)pairs.push([i,j]);}
+  const lpos=new Float32Array(pairs.length*6);
+  const lg=new THREE.BufferGeometry();lg.setAttribute('position',new THREE.BufferAttribute(lpos,3));
+  const lm=new THREE.LineBasicMaterial({color:0x8c9cc8,transparent:true,opacity:0.1,depthWrite:false,blending:THREE.AdditiveBlending});
+  group.add(new THREE.LineSegments(lg,lm));
+  function starLayer(n,spread,size,op){
+    const g=new THREE.BufferGeometry();const a=new Float32Array(n*3);
+    for(let i=0;i<n;i++){a[i*3]=(Math.random()-0.5)*spread;a[i*3+1]=(Math.random()-0.5)*spread*0.65;a[i*3+2]=(Math.random()-0.5)*spread*0.4-6;}
+    g.setAttribute('position',new THREE.BufferAttribute(a,3));
+    return new THREE.Points(g,new THREE.PointsMaterial({color:0xaab4d0,size,transparent:true,opacity:op,depthWrite:false,blending:THREE.AdditiveBlending}));
+  }
+  const star1=starLayer(220,34,0.045,0.5);scene.add(star1);
+  const star2=starLayer(80,24,0.08,0.32);scene.add(star2);
+  let mx=0,my=0,cx=0,cy=0;
+  if(!matchMedia('(pointer:coarse)').matches){
+    addEventListener('mousemove',e=>{mx=(e.clientX/W-0.5)*0.32;my=(e.clientY/H-0.5)*0.2;});
+  }
+  let prog=0;
+  function onScroll(){const max=document.body.scrollHeight-innerHeight;prog=max>0?Math.min(1,Math.max(0,scrollY/max)):0;}
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  function ss(e0,e1,x){const t=Math.max(0,Math.min(1,(x-e0)/(e1-e0)));return t*t*(3-2*t);}
+  const REDUCED=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let formWarm=0;
+  window._setWarm=function(v){formWarm=Math.max(0,Math.min(1,v));};
+  let t=0;
+  (function loop(){
+    requestAnimationFrame(loop);
+    t+=REDUCED?0:0.0015;
+    cx+=(mx-cx)*0.03;cy+=(my-cy)*0.03;
+    group.rotation.y=t+cx;
+    group.rotation.x=Math.sin(t*0.6)*0.05+cy;
+    const warmBottom=ss(0.72,1.0,prog);
+    const warm=Math.max(warmBottom,formWarm);
+    pm.uniforms.uWarm.value=warm;
+    let k=0;
+    for(let p=0;p<pairs.length;p++){const [i,j]=pairs[p];
+      lpos[k++]=base[i].x;lpos[k++]=base[i].y;lpos[k++]=base[i].z;
+      lpos[k++]=base[j].x;lpos[k++]=base[j].y;lpos[k++]=base[j].z;}
+    lg.attributes.position.needsUpdate=true;
+    lm.color.setRGB(0.55+warm*0.30,0.61+warm*0.10,0.78-warm*0.34);
+    const fade=1-ss(0,0.5,prog)*0.4;
+    pm.uniforms.uOpacity.value=fade;
+    star1.material.opacity=0.5*fade;star2.material.opacity=0.32*fade;
+    canvas.style.opacity=(0.5*(0.62+0.38*(1-ss(0,0.45,prog)))).toFixed(3);
+    star1.rotation.y=t*0.04;star2.rotation.y=-t*0.03;
+    renderer.render(scene,cam);
+  })();
+  addEventListener('resize',()=>{W=innerWidth;H=innerHeight;cam.aspect=W/H;cam.updateProjectionMatrix();renderer.setSize(W,H);},{passive:true});
+})();
+(function(){
+  const form=document.getElementById('inquiry-form');
+  if(!form)return;
+  const progress=document.getElementById('form-progress');
+  const errEl=document.getElementById('form-err');
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    const btn=form.querySelector('.submit');
+    errEl.style.display='none';
+    if(!form.name.value.trim()||!form.email.value.trim()||!form.message.value.trim()){
+      errEl.textContent='Please fill in your name, email and message.';
+      errEl.style.display='block';
+      return;
+    }
+    btn.disabled=true;
+    btn.textContent='Sending…';
+    progress.style.width='40%';
+    const body=JSON.stringify({
+      name:form.name.value.trim(),
+      email:form.email.value.trim(),
+      company:form.company.value.trim(),
+      service:form.service.value,
+      message:form.message.value.trim()
+    });
+    try{
+      const res=await fetch('https://form.axscend.ai/contact',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:body
+      });
+      progress.style.width='100%';
+      if(res.ok){
+        setTimeout(function(){
+          document.getElementById('inquiry-wrap').style.display='none';
+          document.getElementById('form-success').classList.add('on');
+          progress.style.width='0';
+        },300);
+      }else{
+        throw new Error('server');
+      }
+    }catch(err){
+      progress.style.width='0';
+      errEl.textContent='Something went wrong. Please try again or email calvert@axscend.ai directly.';
+      errEl.style.display='block';
+      btn.disabled=false;
+      btn.textContent='Send Message';
+    }
+  });
+})();
+</script>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</body>
+</html>
