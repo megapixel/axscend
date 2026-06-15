@@ -95,7 +95,7 @@ footer{padding:40px max(6%,28px);border-top:1px solid var(--line);display:flex;a
 @media(max-width:960px){.c-grid{grid-template-columns:1fr}.sidebar{order:-1}}
 
 .form-card{background:rgba(7,9,18,0.6);border:1px solid var(--line);border-radius:6px;
-  padding:36px;position:relative;overflow:hidden;backdrop-filter:blur(6px)}
+  padding:36px;position:relative;backdrop-filter:blur(6px)}
 .form-progress{position:absolute;top:0;left:0;height:2px;width:0%;
   background:linear-gradient(90deg,var(--gold),var(--gold-lt));transition:width .5s var(--ease)}
 .fsec{font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--ink-faint);
@@ -129,9 +129,9 @@ footer{padding:40px max(6%,28px);border-top:1px solid var(--line);display:flex;a
 .submit:disabled{opacity:.3;cursor:not-allowed}
 .legal{font-family:var(--fm);font-size:9px;color:var(--ink-faint);letter-spacing:.04em;margin-top:14px;line-height:1.6;text-align:center}
 .cal-sub{font-size:14px;line-height:1.7;color:var(--ink-dim);font-weight:300;margin-bottom:22px}
-.calendly-inline-widget{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--void2)}
+.calendly-inline-widget{border:1px solid var(--line);border-radius:6px;background:var(--void2);position:relative;z-index:1}
 .cal-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:var(--fm);font-size:10px;letter-spacing:.18em;color:var(--ink-faint);text-transform:uppercase;z-index:0}
+  font-family:var(--fm);font-size:10px;letter-spacing:.18em;color:var(--ink-faint);text-transform:uppercase;z-index:0;pointer-events:none}
 .opt{color:var(--ink-faint);font-style:normal;text-transform:none;letter-spacing:.04em}
 .reassure{font-size:12px;color:var(--ink-soft);font-weight:300;line-height:1.6;text-align:center;margin-top:14px}
 .form-err{display:none;font-size:12px;color:#e0788c;font-weight:300;line-height:1.6;text-align:center;margin-top:12px}
