@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Is Your Business AI-Ready? · Axscend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #04050E; --void2: #0A0C16; --card: #0C0E1A; --track: #1A1D2E;
+  --gold: #C9A96E; --goldlt: #E6CB9C; --golddk: #9E7B33;
+  --cool: #96B2E0; --gold-glow: rgba(201,169,110,.40); --cool-glow: rgba(150,178,224,.25);
+  --ink: #F4F2FF; --soft: #D8D6E8; --dim: #8A8AA0; --faint: #55576B; --line: #262B45;
+  --disp: 'Cinzel', serif; --body: 'DM Sans', sans-serif; --mono: 'DM Mono', monospace;
+  --eo: cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--void); height: 100%; }
+body {
+  font-family: var(--body); color: var(--soft);
+  min-height: 100dvh; -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Constellation canvas */
+#sky { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* Top progress bar */
+.prog { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,.06); z-index: 30; }
+.prog__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--golddk), var(--gold), var(--goldlt));
+  transform-origin: left; transform: scaleX(0);
+  transition: transform .55s var(--eo);
+  box-shadow: 0 0 10px var(--gold-glow);
+}
+
+/* Layout */
+.shell { position: relative; z-index: 2; min-height: 100dvh; display: flex; flex-direction: column; }
+.wrap {
+  max-width: 480px; margin: 0 auto; min-height: 100dvh;
+  display: flex; flex-direction: column; padding: 0 24px;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Brand header */
+.brand {
+  display: flex; align-items: center; gap: 11px;
+  padding: 26px 0 0; position: relative; z-index: 5;
+}
+.brand svg { width: 26px; height: 26px; flex: none; }
+.brand__name {
+  font-family: var(--disp); font-weight: 600;
+  letter-spacing: 3.5px; font-size: 14px; color: var(--goldlt);
+}
+.brand__r {
+  margin-left: auto; font-family: var(--mono);
+  font-size: 9px; letter-spacing: 2px; color: var(--faint);
+  text-transform: uppercase;
+}
+
+/* Step dot progress (visible during questions) */
+.stepdots {
+  position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 0; z-index: 25;
+  opacity: 0; transition: opacity .5s var(--eo);
+}
+.stepdots.show { opacity: 1; }
+.sdot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(244,242,255,.18);
+  transition: all .45s var(--eo); flex: none;
+}
+.sdot.done { background: var(--gold); box-shadow: 0 0 8px var(--gold-glow); }
+.sdot.curr {
+  background: var(--goldlt);
+  box-shadow: 0 0 14px var(--gold-glow);
+  transform: scale(1.4);
+}
+.sseg {
+  width: 18px; height: 1px;
+  background: rgba(244,242,255,.12);
+  transition: background .45s var(--eo); flex: none;
+}
+.sseg.done { background: var(--gold); }
+
+/* Screen content */
+.screen {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; padding: 32px 0 52px;
+  position: relative; z-index: 5;
+}
+
+/* Entry animation */
+.anim { opacity: 1; transform: translateY(0); }
+.anim.run { animation: enter .44s var(--eo) both; }
+@keyframes enter {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Typography */
+.kick {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 3px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 18px;
+}
+h1 {
+  font-family: var(--disp); font-weight: 600; color: var(--goldlt);
+  font-size: clamp(28px, 8vw, 42px); line-height: 1.08;
+  letter-spacing: .5px; text-wrap: balance; margin-bottom: 20px;
+}
+.lede { font-size: 15.5px; line-height: 1.56; color: var(--soft); margin-bottom: 16px; }
+.meta {
+  font-family: var(--mono); font-size: 12px; color: var(--dim);
+  line-height: 1.65; margin-bottom: 36px;
+}
+.meta b { color: var(--soft); font-weight: 500; }
+
+/* Question layout */
+.qtag {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 2px;
+  color: var(--gold); text-transform: uppercase;
+  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+}
+.qtag .n { color: var(--faint); }
+.qtext {
+  font-size: clamp(20px, 5vw, 24px); line-height: 1.32;
+  color: var(--ink); font-weight: 500;
+  margin-bottom: 14px; text-wrap: balance;
+}
+.qwhy { font-size: 13px; line-height: 1.58; color: var(--dim); margin-bottom: 32px; }
+
+/* Option buttons */
+.opts { display: flex; flex-direction: column; gap: 10px; }
+.opt {
+  appearance: none; width: 100%; min-height: 60px;
+  padding: 16px 20px; text-align: left;
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  color: var(--soft); font-family: var(--body);
+  font-size: 15.5px; font-weight: 500; cursor: pointer;
+  display: flex; align-items: center; gap: 14px;
+  transition: transform .18s var(--eo), border-color .18s ease,
+              background .18s ease, color .18s ease, box-shadow .18s ease;
+}
+.opt .mk {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 1.5px solid var(--faint); flex: none;
+  transition: border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .opt:hover { border-color: var(--golddk); color: var(--ink); }
+  .opt:hover .mk { border-color: var(--gold); }
+}
+.opt:active { transform: scale(0.983); }
+.opt.sel {
+  border-color: var(--gold);
+  background: rgba(201,169,110,.10);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--golddk), 0 4px 24px var(--gold-glow);
+}
+.opt.sel .mk {
+  border-color: var(--gold);
+  background: var(--gold);
+  box-shadow: inset 0 0 0 3px var(--card), 0 0 10px var(--gold-glow);
+}
+
+/* Text inputs */
+.ta {
+  width: 100%; min-height: 108px;
+  background: rgba(244,242,255,.03); border: 1px solid var(--line);
+  border-radius: 14px; color: var(--ink);
+  font-family: var(--body); font-size: 15.5px; line-height: 1.5;
+  padding: 16px; resize: none; margin-bottom: 20px;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.ta:focus {
+  outline: none; border-color: var(--gold);
+  background: rgba(201,169,110,.05);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+.ta::placeholder { color: var(--faint); }
+
+.inp {
+  width: 100%; min-height: 54px;
+  background: rgba(244,242,255,.03); border: 1px solid var(--line);
+  border-radius: 14px; color: var(--ink);
+  font-family: var(--body); font-size: 15.5px;
+  padding: 14px 16px; margin-bottom: 12px;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.inp:focus {
+  outline: none; border-color: var(--gold);
+  background: rgba(201,169,110,.05);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+.inp::placeholder { color: var(--faint); }
+.capture { margin-top: 26px; }
+
+/* Buttons */
+.back {
+  margin-top: 26px; background: none; border: none;
+  color: var(--faint); font-family: var(--mono);
+  font-size: 12px; letter-spacing: 1px; cursor: pointer;
+  padding: 6px 0; align-self: flex-start;
+  transition: color .15s;
+}
+.back:hover { color: var(--dim); }
+
+.btn {
+  appearance: none; display: inline-flex; align-items: center;
+  justify-content: center; gap: 10px;
+  width: 100%; min-height: 56px; padding: 16px 24px;
+  border-radius: 40px; cursor: pointer;
+  font-family: var(--body); font-size: 15px; font-weight: 600; letter-spacing: .2px;
+  background: var(--gold); color: #1a1206; border: none;
+  transition: transform .18s var(--eo), background .18s ease, opacity .18s ease, box-shadow .18s ease;
+}
+.btn:active { transform: scale(0.975); }
+.btn:disabled { opacity: .36; pointer-events: none; }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    background: var(--goldlt);
+    box-shadow: 0 6px 30px var(--gold-glow);
+    transform: translateY(-1px);
+  }
+}
+.btn--ghost {
+  background: none; border: 1px solid var(--line); color: var(--soft);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn--ghost:hover {
+    border-color: var(--golddk); color: var(--ink);
+    background: none; transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(201,169,110,.12);
+  }
+}
+
+/* Score reveal */
+.score-band {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 2px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 10px;
+}
+.score-num {
+  font-family: var(--disp); font-weight: 600; color: var(--goldlt);
+  font-size: clamp(56px, 18vw, 82px); line-height: 1; letter-spacing: 1px;
+}
+.score-num small { font-size: .4em; color: var(--dim); font-family: var(--body); font-weight: 500; letter-spacing: 0; }
+.score-label { font-family: var(--disp); font-size: 22px; color: var(--ink); font-weight: 600; margin: 14px 0 6px; }
+.score-desc { font-size: 14px; line-height: 1.56; color: var(--soft); margin-bottom: 28px; }
+
+/* Axis bars */
+.axis { margin-bottom: 18px; }
+.axis__top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.axis__name { font-size: 14px; color: var(--soft); font-weight: 500; }
+.axis__val { font-family: var(--mono); font-size: 13px; color: var(--goldlt); }
+.axis__track { height: 7px; background: var(--track); border-radius: 5px; overflow: hidden; }
+.axis__fill {
+  height: 100%; border-radius: 5px;
+  background: linear-gradient(90deg, var(--golddk), var(--gold), var(--goldlt));
+  transform-origin: left; transform: scaleX(0);
+  transition: transform .85s var(--eo);
+  box-shadow: 0 0 12px rgba(201,169,110,.3);
+}
+
+/* Weak/insight card */
+.weak {
+  margin: 26px 0 4px; padding: 18px 20px;
+  border: 1px solid var(--line); border-radius: 14px; background: var(--card);
+}
+.weak__k {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 2px;
+  color: var(--dim); text-transform: uppercase; margin-bottom: 8px;
+}
+.weak__v { font-size: 15px; color: var(--ink); line-height: 1.5; }
+.weak__v b { color: var(--goldlt); font-weight: 600; }
+
+/* Reflection section */
+.reflect { margin-top: 28px; }
+.reflect__k {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 2px;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 12px;
+}
+.reflect__q { font-size: 15.5px; color: var(--ink); line-height: 1.45; margin-bottom: 14px; }
+.reflect__opt { color: var(--faint); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 11px; }
+
+.cta-wrap { margin-top: 28px; }
+.cta-sub { font-size: 13px; color: var(--dim); line-height: 1.5; margin: 14px 2px 0; text-align: center; }
+.privacy {
+  font-family: var(--mono); font-size: 10.5px; color: var(--faint);
+  line-height: 1.65; margin-top: 24px; text-align: center;
+}
+.restart {
+  display: block; margin: 20px auto 0; background: none; border: none;
+  color: var(--faint); font-family: var(--mono);
+  font-size: 11px; letter-spacing: 1px; cursor: pointer;
+  transition: color .15s;
+}
+.restart:hover { color: var(--dim); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .anim.run { animation: fade .25s ease both; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  .prog__fill, .axis__fill { transition: transform .3s ease; }
+  .sdot, .sseg { transition: background .2s ease; }
+}
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+<div class="prog"><div class="prog__fill" id="progFill"></div></div>
+
+<!-- Step dot progress (10 questions) -->
+<div class="stepdots" id="stepdots">
+  <div class="sdot" data-i="1"></div><div class="sseg" data-i="1"></div>
+  <div class="sdot" data-i="2"></div><div class="sseg" data-i="2"></div>
+  <div class="sdot" data-i="3"></div><div class="sseg" data-i="3"></div>
+  <div class="sdot" data-i="4"></div><div class="sseg" data-i="4"></div>
+  <div class="sdot" data-i="5"></div><div class="sseg" data-i="5"></div>
+  <div class="sdot" data-i="6"></div><div class="sseg" data-i="6"></div>
+  <div class="sdot" data-i="7"></div><div class="sseg" data-i="7"></div>
+  <div class="sdot" data-i="8"></div><div class="sseg" data-i="8"></div>
+  <div class="sdot" data-i="9"></div><div class="sseg" data-i="9"></div>
+  <div class="sdot" data-i="10"></div>
+</div>
+
+<div class="shell">
+  <div class="wrap">
+    <!-- Brand mark: double-peak from wizard -->
+    <div class="brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="14" r="2.8" fill="#e6cb9c"/>
+        <path d="M16 47 L32 23 L48 47" fill="none" stroke="#c9a96e" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M24 47 L32 35 L40 47" fill="none" stroke="#c9a96e" stroke-opacity=".5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand__name">AXSCEND</span>
+      <span class="brand__r" id="brandR">A 3-MINUTE CHECK</span>
+    </div>
+
+    <main class="screen anim" id="screen">
+      <div class="kick">The AI Readiness Check</div>
+      <h1>Is your business AI-ready?</h1>
+      <p class="lede">Ten honest questions, and a few in your own words, on the two things that decide whether you win the next few years: can AI find you, and is AI working for you?</p>
+      <p class="meta">About <b>three minutes</b>. Tap your honest answer, and write a line where it asks. <b>Nothing is sent</b> until you choose to. Your answers stay on this device.</p>
+      <button class="btn" id="startBtn">Start the check</button>
+    </main>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+// ── Constellation background ────────────────────────────────────────
+(function() {
+  var cv = document.getElementById("sky");
+  var ctx = cv.getContext("2d");
+  var W, H, P = [];
+  var rm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function rsz() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+  rsz();
+  addEventListener("resize", rsz, { passive: true });
+  for (var i = 0; i < 70; i++) {
+    P.push({
+      x: Math.random(), y: Math.random(),
+      vx: (Math.random() - .5) * .00012, vy: (Math.random() - .5) * .00012,
+      r: Math.random() > .85 ? 1.8 : 1,
+      g: Math.random() > .8
+    });
+  }
+  function drawSky() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = "lighter";
+    for (var j = 0; j < P.length; j++) {
+      var p = P[j];
+      if (!rm) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > 1) p.vx *= -1;
+        if (p.y < 0 || p.y > 1) p.vy *= -1;
+      }
+      var X = p.x * W, Y = p.y * H;
+      var c = p.g ? "201,169,110" : "150,178,224";
+      var g = ctx.createRadialGradient(X, Y, 0, X, Y, p.r * 4);
+      g.addColorStop(0, "rgba(" + c + ",.9)");
+      g.addColorStop(1, "rgba(" + c + ",0)");
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(X, Y, p.r * 4, 0, 7); ctx.fill();
+    }
+    ctx.globalCompositeOperation = "source-over";
+    for (var a = 0; a < P.length; a++) {
+      for (var b = a + 1; b < P.length; b++) {
+        var dx = (P[a].x - P[b].x) * W, dy = (P[a].y - P[b].y) * H;
+        var d = Math.hypot(dx, dy);
+        if (d < 120) {
+          ctx.strokeStyle = "rgba(150,178,224," + (.10 * (1 - d / 120)) + ")";
+          ctx.lineWidth = .5;
+          ctx.beginPath();
+          ctx.moveTo(P[a].x * W, P[a].y * H);
+          ctx.lineTo(P[b].x * W, P[b].y * H);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(drawSky);
+  }
+  drawSky();
+})();
+
+// ── Quiz ─────────────────────────────────────────────────────────────
+var WA_NUMBER = "6590123311";
+// Set this to your branded URL once you have one (e.g. "https://check.axscend.ai").
+// Leave empty to share whatever URL is in the browser bar.
+var SHARE_URL = "";
+
+var QUESTIONS = [
+  { axis: "found", tag: "Can AI find you?",
+    q: "When you ask an AI tool to recommend a business like yours, does yours come up?",
+    why: "If AI does not name you, the customers asking it are handed to someone else." },
+  { axis: "found", tag: "Can AI find you?",
+    q: "Are your business details consistent everywhere online: name, services, location, hours?",
+    why: "AI repeats consistent information and quietly skips conflicting details." },
+  { axis: "found", tag: "Can AI find you?",
+    q: "Does your website explain what you do, and for whom, in plain language?",
+    why: "AI reads plain, structured content. Clever or vague copy gets misread." },
+  { axis: "found", tag: "Can AI find you?",
+    q: "Do you have credible outside mentions: reviews, listings, directories, or press?",
+    why: "AI weighs third-party signals to decide who is trustworthy enough to recommend." },
+  { axis: "found", tag: "Can AI find you?",
+    q: "Do you know how your business shows up when customers ask AI about your category?",
+    why: "You cannot fix what you have never looked at. Most owners never have." },
+  { axis: "run", tag: "Is AI working for you?",
+    q: "Does your team have one agreed way of using AI, not everyone doing their own thing?",
+    why: "Without a standard, AI use is inconsistent and most of its value leaks away." },
+  { axis: "run", tag: "Is AI working for you?",
+    q: "Have you identified the repetitive tasks AI could take off your plate?",
+    why: "Knowing where AI helps is the first step to getting those hours back." },
+  { axis: "run", tag: "Is AI working for you?",
+    q: "Do your staff feel confident, not anxious, using AI day to day?",
+    why: "Adoption fails on fear and confusion far more often than on the technology." },
+  { axis: "run", tag: "Is AI working for you?",
+    q: "Do you use AI without exposing sensitive customer or business information?",
+    why: "Most businesses adopt AI before setting basic guardrails. That is a real, quiet risk." },
+  { axis: "run", tag: "Is AI working for you?",
+    q: "Can you point to a place where AI already saves you measurable time or money?",
+    why: "If you cannot name a result, AI is still a toy in your business, not yet a tool." }
+];
+
+var OPTIONS = [{ label: "Yes", val: 1 }, { label: "Partly", val: 0.5 }, { label: "No", val: 0 }];
+
+var STEPS = [
+  { t: "q", qi: 0 }, { t: "q", qi: 1 }, { t: "q", qi: 2 }, { t: "q", qi: 3 }, { t: "q", qi: 4 },
+  { t: "w", key: "v", prompt: "When a customer asks AI about your category, what do you think it says about you, if anything?", hint: "Write it as you would say it. A line or two is enough.", req: true },
+  { t: "q", qi: 5 }, { t: "q", qi: 6 }, { t: "q", qi: 7 }, { t: "q", qi: 8 }, { t: "q", qi: 9 },
+  { t: "w", key: "a", prompt: "What is the one task you most wish AI would take off your plate this month?", hint: "Be specific. A line or two is enough.", req: true },
+  { t: "r" }
+];
+var TOTAL = STEPS.length - 1;
+
+var answers = new Array(QUESTIONS.length).fill(null);
+var writeAns = { v: "", a: "", worry: "", nm: "", co: "", em: "" };
+var step = 0;
+
+var screen = document.getElementById("screen");
+var progFill = document.getElementById("progFill");
+var brandR = document.getElementById("brandR");
+var stepdots = document.getElementById("stepdots");
+var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function esc(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function replay() {
+  screen.classList.remove("run"); void screen.offsetWidth; screen.classList.add("run");
+}
+function setProgress(p) { progFill.style.transform = "scaleX(" + p + ")"; }
+function fmt(n) { return (n % 1 === 0) ? n.toString() : n.toFixed(1); }
+
+// Update dot progress: qNum = 1-10 when on questions, else null
+function setDots(qNum) {
+  var show = qNum !== null;
+  stepdots.classList.toggle("show", show);
+  var dots = stepdots.querySelectorAll(".sdot");
+  var segs = stepdots.querySelectorAll(".sseg");
+  if (!show) return;
+  dots.forEach(function(d) {
+    var i = +d.getAttribute("data-i");
+    d.classList.toggle("done", i < qNum);
+    d.classList.toggle("curr", i === qNum);
+  });
+  segs.forEach(function(s) {
+    var i = +s.getAttribute("data-i");
+    s.classList.toggle("done", i < qNum);
+  });
+}
+
+document.getElementById("startBtn").addEventListener("click", function() { step = 0; renderStep(); });
+
+function renderStep() {
+  var s = STEPS[step];
+  if (s.t === "q") renderQuestion(s.qi);
+  else if (s.t === "w") renderWrite(s);
+  else renderReveal();
+}
+
+function renderQuestion(qi) {
+  var item = QUESTIONS[qi];
+  var qNum = qi + 1;
+  brandR.textContent = "QUESTION " + qNum + " OF 10";
+  setProgress(step / TOTAL);
+  setDots(qNum);
+
+  var opts = OPTIONS.map(function(o) {
+    var sel = answers[qi] === o.val ? " sel" : "";
+    return '<button class="opt' + sel + '" data-val="' + o.val + '"><span class="mk"></span>' + o.label + '</button>';
+  }).join("");
+  var backBtn = step > 0 ? '<button class="back" id="backBtn">&lsaquo; Previous</button>' : '';
+
+  screen.innerHTML =
+    '<div class="qtag">' + item.tag + '<span class="n"> &middot; ' + qNum + ' of 10</span></div>' +
+    '<div class="qtext">' + item.q + '</div>' +
+    '<div class="qwhy">' + item.why + '</div>' +
+    '<div class="opts">' + opts + '</div>' + backBtn;
+  replay();
+
+  var optEls = screen.querySelectorAll(".opt");
+  optEls.forEach(function(el) {
+    el.addEventListener("click", function() {
+      answers[qi] = parseFloat(el.getAttribute("data-val"));
+      optEls.forEach(function(e) { e.classList.remove("sel"); });
+      el.classList.add("sel");
+      setProgress((step + 1) / TOTAL);
+      setTimeout(function() { step++; renderStep(); }, reduceMotion ? 80 : 220);
+    });
+  });
+  var bb = document.getElementById("backBtn");
+  if (bb) bb.addEventListener("click", function() { step--; renderStep(); });
+}
+
+function renderWrite(cfg) {
+  brandR.textContent = "IN YOUR WORDS";
+  setProgress(step / TOTAL);
+  setDots(null);
+
+  var val = writeAns[cfg.key] || "";
+  var dis = (cfg.req && val.trim().length < 6) ? " disabled" : "";
+  screen.innerHTML =
+    '<div class="qtag">In your words</div>' +
+    '<div class="qtext">' + cfg.prompt + '</div>' +
+    '<div class="qwhy">' + cfg.hint + '</div>' +
+    '<textarea class="ta" id="ta" rows="3" placeholder="Type your answer here" autocomplete="off">' + esc(val) + '</textarea>' +
+    '<button class="btn" id="contBtn"' + dis + '>Continue</button>' +
+    '<button class="back" id="backBtn">&lsaquo; Previous</button>';
+  replay();
+
+  var ta = document.getElementById("ta");
+  var cont = document.getElementById("contBtn");
+  ta.addEventListener("input", function() {
+    writeAns[cfg.key] = ta.value;
+    if (cfg.req) cont.disabled = ta.value.trim().length < 6;
+  });
+  cont.addEventListener("click", function() { writeAns[cfg.key] = ta.value; step++; renderStep(); });
+  document.getElementById("backBtn").addEventListener("click", function() { step--; renderStep(); });
+}
+
+function scores() {
+  var found = 0, run = 0;
+  for (var i = 0; i < QUESTIONS.length; i++) {
+    if (QUESTIONS[i].axis === "found") found += answers[i]; else run += answers[i];
+  }
+  return { found: found, run: run, total: found + run };
+}
+
+function band(total) {
+  if (total <= 3)  return { name: "At risk",          desc: "AI mostly cannot find you, and is not yet working for you. The shift is happening without you." };
+  if (total <= 7)  return { name: "Getting there",    desc: "You have started, but real gaps are quietly costing you visibility and time." };
+  return               { name: "Almost AI-ready",  desc: "A strong position. Tighten the last gaps before your competitors close theirs." };
+}
+
+function renderReveal() {
+  var s = scores();
+  var b = band(s.total);
+  brandR.textContent = "YOUR RESULT";
+  setProgress(1);
+  setDots(null);
+
+  var weakTxt;
+  if (s.found < s.run)      weakTxt = 'Your weakest half is <b>being found by AI</b>. Customers asking AI may not be reaching you.';
+  else if (s.run < s.found) weakTxt = 'Your weakest half is <b>putting AI to work</b>. There is time and cost still on the table inside the business.';
+  else                      weakTxt = 'Both halves score the same. There is room to grow on <b>being found</b> and on <b>putting AI to work</b>.';
+
+  screen.innerHTML =
+    '<div class="score-band">Your AI readiness</div>' +
+    '<div class="score-num"><span id="scoreN">0</span><small> / 10</small></div>' +
+    '<div class="score-label">' + b.name + '</div>' +
+    '<div class="score-desc">' + b.desc + '</div>' +
+    '<div class="axis"><div class="axis__top"><span class="axis__name">Can AI find you?</span><span class="axis__val">' + fmt(s.found) + ' / 5</span></div><div class="axis__track"><div class="axis__fill" id="f1"></div></div></div>' +
+    '<div class="axis"><div class="axis__top"><span class="axis__name">Is AI working for you?</span><span class="axis__val">' + fmt(s.run) + ' / 5</span></div><div class="axis__track"><div class="axis__fill" id="f2"></div></div></div>' +
+    '<div class="weak"><div class="weak__k">What to look at first</div><div class="weak__v">' + weakTxt + '</div></div>' +
+    '<div class="reflect"><div class="reflect__k">One last thing <span class="reflect__opt">(optional)</span></div>' +
+    '<div class="reflect__q">Seeing this, what worries you most about where your business stands?</div>' +
+    '<textarea class="ta" id="worryTa" rows="3" placeholder="Type your answer here" autocomplete="off">' + esc(writeAns.worry) + '</textarea></div>' +
+    '<div class="capture"><div class="reflect__k">Your details</div>' +
+    '<input class="inp" id="nm" type="text" placeholder="Your name" autocomplete="name" value="' + esc(writeAns.nm) + '">' +
+    '<input class="inp" id="co" type="text" placeholder="Your company" autocomplete="organization" value="' + esc(writeAns.co) + '">' +
+    '<input class="inp" id="em" type="email" placeholder="Your email" autocomplete="email" value="' + esc(writeAns.em) + '"></div>' +
+    '<div class="cta-wrap">' +
+    '<button class="btn" id="waBtn" disabled>Message the Axscend team about my result</button>' +
+    '<p class="cta-sub">The Axscend team will follow up with a link to book a time.</p>' +
+    '<button class="btn btn--ghost" id="shareBtn" style="margin-top:12px;">Share with another business owner</button>' +
+    '</div>' +
+    '<p class="privacy">Your answers stay on this device. Nothing is sent until you tap to message.</p>' +
+    '<button class="restart" id="restartBtn">Start over</button>';
+  replay();
+
+  // Animated score counter
+  var target = s.total, el = document.getElementById("scoreN");
+  if (reduceMotion) {
+    el.textContent = fmt(target);
+  } else {
+    var t0 = performance.now(), dur = 900;
+    var ease = function(t) { return 1 - Math.pow(1 - t, 3); };
+    (function tick(now) {
+      var p = Math.min((now - t0) / dur, 1);
+      el.textContent = fmt(Math.round(ease(p) * target * 2) / 2);
+      if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target);
+    })(t0);
+  }
+
+  // Animate axis bars after paint
+  requestAnimationFrame(function() {
+    setTimeout(function() {
+      document.getElementById("f1").style.transform = "scaleX(" + (s.found / 5) + ")";
+      document.getElementById("f2").style.transform = "scaleX(" + (s.run / 5) + ")";
+    }, 140);
+  });
+
+  // CTA form
+  var nm = document.getElementById("nm");
+  var co = document.getElementById("co");
+  var em = document.getElementById("em");
+  var waBtn = document.getElementById("waBtn");
+  function syncReady() {
+    writeAns.nm = nm.value; writeAns.co = co.value; writeAns.em = em.value;
+    waBtn.disabled = !(nm.value.trim() && co.value.trim() && em.value.trim());
+  }
+  nm.addEventListener("input", syncReady);
+  co.addEventListener("input", syncReady);
+  em.addEventListener("input", syncReady);
+  syncReady();
+  document.getElementById("worryTa").addEventListener("input", function(e) { writeAns.worry = e.target.value; });
+
+  waBtn.addEventListener("click", function() {
+    var lines = [];
+    lines.push("Hi Axscend team, I did the AI-Readiness check.");
+    lines.push("Name: " + writeAns.nm.trim());
+    lines.push("Company: " + writeAns.co.trim());
+    lines.push("Email: " + writeAns.em.trim());
+    lines.push("Score: " + fmt(s.total) + "/10  (Found by AI " + fmt(s.found) + "/5 · Working for me " + fmt(s.run) + "/5)");
+    if (writeAns.v.trim()) lines.push("How I think AI sees me: " + writeAns.v.trim());
+    if (writeAns.a.trim()) lines.push("Task I want AI to take: " + writeAns.a.trim());
+    if (writeAns.worry.trim()) lines.push("What worries me most: " + writeAns.worry.trim());
+    lines.push("I would like to talk about the workshop and next steps.");
+    window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines.join("\n")), "_blank");
+  });
+
+  document.getElementById("shareBtn").addEventListener("click", function() {
+    var url = SHARE_URL || window.location.href;
+    var blurb = "I just did this quick AI-readiness check for my business. Worth a look:";
+    if (navigator.share) {
+      navigator.share({ title: "AI Readiness Check by Axscend", text: blurb, url: url }).catch(function() {});
+    } else {
+      window.open("https://wa.me/?text=" + encodeURIComponent(blurb + " " + url), "_blank");
+    }
+  });
+
+  document.getElementById("restartBtn").addEventListener("click", function() {
+    answers = new Array(QUESTIONS.length).fill(null);
+    writeAns = { v: "", a: "", worry: "", nm: "", co: "", em: "" };
+    step = 0; renderStep();
+  });
+}
+</script>
+</body>
+</html>

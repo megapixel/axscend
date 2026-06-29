@@ -16,8 +16,8 @@
  */
 
 const ALLOWED_ORIGINS = ['https://axscend.ai', 'https://www.axscend.ai', 'https://megapixel.github.io'];
-const TO_EMAIL = 'hello@axscend.io';
-const FROM_EMAIL = 'hello@axscend.io';
+const TO_EMAIL = 'hello@axscend.ai';
+const FROM_EMAIL = 'hello@axscend.ai';
 const FROM_NAME = 'Axscend Website';
 
 function corsHeaders(origin) {
@@ -128,7 +128,7 @@ export default {
 
     const sgErr = await sgRes.text();
     console.error('SendGrid error', sgRes.status, sgErr);
-    return new Response(JSON.stringify({ error: 'Email delivery failed' }), {
+    return new Response(JSON.stringify({ error: 'Email delivery failed', detail: sgErr, status: sgRes.status }), {
       status: 502,
       headers: { ...cors, 'Content-Type': 'application/json' },
     });
